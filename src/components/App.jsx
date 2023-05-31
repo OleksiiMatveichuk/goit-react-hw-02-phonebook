@@ -33,14 +33,8 @@ export class App extends Component {
   };
 
   handleFilerChange = e => {
-    console.log('e.target.value :>> ', e.target.value);
     const { value } = e.target;
     this.setState({ filter: value });
-    // const { contacts } = this.state;
-    // const filteredContacts = contacts.filter(contact =>
-    //   contact.name.toLowerCase().includes(value.toLowerCase())
-    // );
-    // return filteredContacts;
   };
 
   handleFilter = () => {
@@ -53,8 +47,6 @@ export class App extends Component {
 
   render() {
     const resultFilter = this.handleFilter();
-    console.log('result :>> ', resultFilter);
-    // console.log('this.state.filter :>> ', this.state.filter);
     return (
       <div
         style={{
