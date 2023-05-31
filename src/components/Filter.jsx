@@ -1,8 +1,8 @@
-export const Filter = ({ filterChange }) => {
+export const Filter = ({ filterChange, value }) => {
   return (
     <>
       <p>Finde contacts by name</p>
-      <input type="text" name="filter" onChange={filterChange} />
+      <input type="text" name="filter" value={value} onChange={filterChange} />
     </>
   );
 };

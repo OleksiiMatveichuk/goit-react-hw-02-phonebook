@@ -35,12 +35,26 @@ export class App extends Component {
   handleFilerChange = e => {
     console.log('e.target.value :>> ', e.target.value);
     const { value } = e.target;
-    const { filter } = this.state;
     this.setState({ filter: value });
-    console.log('filter :>> ', filter);
+    // const { contacts } = this.state;
+    // const filteredContacts = contacts.filter(contact =>
+    //   contact.name.toLowerCase().includes(value.toLowerCase())
+    // );
+    // return filteredContacts;
+  };
+
+  handleFilter = () => {
+    const { filter, contacts } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    return filteredContacts;
   };
 
   render() {
+    const resultFilter = this.handleFilter();
+    console.log('result :>> ', resultFilter);
+    // console.log('this.state.filter :>> ', this.state.filter);
     return (
       <div
         style={{
@@ -53,13 +67,18 @@ export class App extends Component {
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm change={this.handleChange} submit={this.handleSubmit} />
-        <h2>Contacts</h2>
-        <Filter filterChange={this.handleFilerChange} />
-        <ContactList
-          array={this.state.contacts}
-          clbDelete={this.handleDelete}
+        <ContactForm
+          change={this.handleChange}
+          submit={this.handleSubmit}
+          name={this.state.name}
+          number={this.state.number}
         />
+        <h2>Contacts</h2>
+        <Filter
+          filterChange={this.handleFilerChange}
+          value={this.state.filter}
+        />
+        <ContactList array={resultFilter} clbDelete={this.handleDelete} />
       </div>
     );
   }
