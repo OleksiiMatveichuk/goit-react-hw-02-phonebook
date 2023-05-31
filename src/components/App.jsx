@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
@@ -54,8 +55,10 @@ export class App extends Component {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 40,
+          fontSize: 20,
           color: '#010101',
+          // maxWidth: '600px',
+          // backgroundColor: '#fff',
         }}
       >
         <h1>Phonebook</h1>

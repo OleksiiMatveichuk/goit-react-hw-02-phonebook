@@ -1,16 +1,29 @@
+import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 export const ContactList = ({ array, clbDelete }) => {
   return (
-    <ul>
+    <ListGroup as="ul">
       {array.map((el, i) => (
-        <li key={i + 1}>
+        <ListGroup.Item as="li" key={i + 1}>
           <p>
             {el.name}: {el.number}
           </p>
-          <button type="button" name={el.id} onClick={clbDelete}>
+          <Button
+            variant="secondary"
+            type="button"
+            name={el.id}
+            onClick={clbDelete}
+          >
             Delete
-          </button>
-        </li>
+          </Button>
+        </ListGroup.Item>
       ))}
-    </ul>
+    </ListGroup>
   );
+};
+
+ContactList.propTypes = {
+  array: PropTypes.array.isRequired,
 };
