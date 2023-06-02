@@ -1,35 +1,33 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { ContactForm } from './ContactForm';
 import { Filter } from './Filter';
 import { ContactList } from './ContactList';
+import { nanoid } from 'nanoid';
 
 export class App extends Component {
   state = {
     contacts: [],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const { name, number, contacts } = this.state;
+  handleSubmit = ({ name, number }) => {
+    const { contacts } = this.state;
     const newItem = { id: nanoid(), name, number };
-    this.setState({ contacts: [...contacts, newItem], name: '', number: '' });
+    const isExist = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (isExist) {
+      alert('Contact already exist');
+      return;
+    }
+    this.setState(prev => ({ contacts: [...prev.contacts, newItem] }));
   };
 
-  handleDelete = e => {
+  handleDelete = id => {
     const { contacts } = this.state;
     this.setState({
-      contacts: contacts.filter(contact => contact.id !== e.target.name),
+      contacts: contacts.filter(contact => contact.id !== id),
     });
   };
 
@@ -57,17 +55,10 @@ export class App extends Component {
           alignItems: 'center',
           fontSize: 20,
           color: '#010101',
-          // maxWidth: '600px',
-          // backgroundColor: '#fff',
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm
-          change={this.handleChange}
-          submit={this.handleSubmit}
-          name={this.state.name}
-          number={this.state.number}
-        />
+        <ContactForm submit={this.handleSubmit} />
         <h2>Contacts</h2>
         <Filter
           filterChange={this.handleFilerChange}

@@ -14,7 +14,7 @@ export const ContactList = ({ array, clbDelete }) => {
             variant="secondary"
             type="button"
             name={el.id}
-            onClick={clbDelete}
+            onClick={() => clbDelete(el.id)}
           >
             Delete
           </Button>
